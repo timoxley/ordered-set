@@ -1,0 +1,30 @@
+{
+  "name": "ordered-set",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "6to5-node test/index.js | tap-spec",
+    "bench": "6to5-node bench",
+    "prepublish": "6to5 ordered-set.js > index.js",
+    "make-example": "writ Readme.md && mv Readme example/index.js"
+  },
+  "browserify": {
+    "transform": [
+      "6to5-browserify"
+    ]
+  },
+  "keywords": [],
+  "author": "Tim Oxley <secoif@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "6to5": "^2.0.4",
+    "6to5-browserify": "^1.4.0",
+    "tap-spec": "^2.1.2",
+    "tape": "^3.0.3",
+    "writ": "0.0.6"
+  },
+  "dependencies": {
+    "fast.js": "^0.1.1"
+  }
+}
