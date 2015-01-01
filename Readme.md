@@ -110,34 +110,6 @@ orderedSet.delete(0)
 console.log('orderedSet.size', orderedSet.size) // set.size 3
 ```
 
-## Benchmarks
-
-See [bench/index.js](bench/index.js).
-
-Benchmarks run with `118311` items per-set:
-
-#### Without ordering
-
-i.e. just vanilla `new Set()`
-
-```
-vanilla set 10 set initialisations.: 2765ms
-vanilla set various adds & removes: 614ms
-vanilla set 5 for...of iterations: 480ms
-vanilla set 5 forEach iterations: 320ms
-```
-
-#### With ordering
-
-Note the overhead of simply sorting the dataset is `~60ms`.
-
-```
-ordered set 10 set initialisations.: 2952ms
-ordered set various adds & removes: 1223ms
-ordered set 5 for...of iterations: 568ms
-ordered set 5 forEach iterations: 380ms
-```
-
 ## License
 
 MIT

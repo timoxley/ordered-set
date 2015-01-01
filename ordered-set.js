@@ -34,7 +34,7 @@ function SetArr() {
   return set
 }
 
-class OrderedSet extends Set {
+class OrderedSetConditionalCache extends Set {
   constructor(items) {
     super(items)
     this.add = add
@@ -244,6 +244,7 @@ class OrderedSetCacheOnRead extends Set {
     super(items)
     this.items = []
     this.dirty = true
+    this.add = addOnRead
   }
 
   use(fn) {
@@ -252,9 +253,11 @@ class OrderedSetCacheOnRead extends Set {
   }
 
   sort() {
-    this.items = this.dirty ? Array.from(super.values()).sort(this.sortFunction) : this.items
+    let dirty = this.dirty
+    let items = this.items
+    items = dirty ? Array.from(super.values()).sort(this.sortFunction) : items
     this.dirty = false
-    return this.items
+    return this.items = items
   }
 
   values() {
@@ -272,18 +275,13 @@ class OrderedSetCacheOnRead extends Set {
     return a - b
   }
 
-  add(item) {
-    this.dirty = true
-    return super.add(item)
-  }
-
   delete(item) {
-    this.dirty = true
+    this.dirty = this.dirty || true
     return super.delete(item)
   }
 
   clear() {
-    this.dirty = true
+    this.dirty = this.dirty || true
     return super.clear()
   }
 
@@ -292,10 +290,93 @@ class OrderedSetCacheOnRead extends Set {
   }
 }
 
-OrderedSet = OrderedSetCacheOnRead
+function addOnRead(item) {
+  this.dirty = this.dirty || true
+  return Set.prototype.add.call(this, item)
+}
+
+//class OrderedSetAdd extends Set {
+  //constructor(items) {
+    //super(items)
+    //this.add = addAdd
+    //this[ADDED] = new Set()
+  //}
+
+  /**
+   * Produces an ordered Array of items from this Set.
+   */
+
+  //sort() {
+    //// all returned Arrays are fresh via slice because turns out working
+    //// with a mutated Array can be incredibly slow for arrays larger
+    //// than a particular size (e.g. 118311).
+
+    //if (!this[CACHE]) {
+      //this[ADDED].clear()
+      //// generate cache if it doesn't exist
+      //return this[CACHE] = Array.from(super.values()).sort(this.sortFunction)
+    //}
+
+    //// keep already sorted items intact as much as possible by
+    //// keeping cache and sorting sorted added and removed items.
+
+    //if (this[ADDED].size) {
+      //this[CACHE].push(...Array.from(this[ADDED]).sort(this.sortFunction))
+      //this[CACHE] = this[CACHE].sort(this.sortFunction)
+      //this[ADDED].clear()
+      //return this[CACHE]
+    //}
+
+    //return this[CACHE]
+  //}
+
+  //use(fn) {
+    //this.reset()
+    //this.sortFunction = fn
+  //}
+
+  //sortFunction(a, b) {
+    //return a - b
+  //}
+
+  //delete(item) {
+    //if (!this.has(item)) return super.delete(item)
+    //this[ADDED].delete(item)
+    //return super.delete(item)
+  //}
+
+  //clear() {
+    //this.reset()
+    //return super.clear()
+  //}
+
+  //reset() {
+    //this[ADDED].clear()
+    //if (this[CACHE]) this[CACHE] = undefined
+  //}
+
+  //values() {
+    //return this.sort()[Symbol.iterator]()
+  //}
+
+  //forEach(callback) {
+    //let items = this.sort()
+    //for (let i = 0; i < items.length; i++) {
+      //callback.call(this, items[i], i, this)
+    //}
+  //}
+
+  //[Symbol.iterator]() {
+    //return this.values()
+  //}
+//}
+
+
+let OrderedSet = OrderedSetCacheOnRead
+OrderedSet.OrderedSet = OrderedSet
 OrderedSet.OrderedSetNoCache = OrderedSetNoCache
-OrderedSet.OrderedSetCacheOnWrite = OrderedSetCacheOnWrite
-OrderedSet.OrderedSetCacheOnRead = OrderedSetCacheOnRead
+//OrderedSet.OrderedSetCacheOnWrite = OrderedSetCacheOnWrite
+OrderedSet.OrderedSetConditionalCache = OrderedSetConditionalCache
 OrderedSet.prototype.keys = OrderedSet.prototype.values
 
 module.exports = OrderedSet

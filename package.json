@@ -20,11 +20,14 @@
   "devDependencies": {
     "6to5": "^2.0.4",
     "6to5-browserify": "^1.4.0",
+    "benchmark": "^1.0.0",
+    "seedrandom": "^2.3.11",
     "tap-spec": "^2.1.2",
     "tape": "^3.0.3",
     "writ": "0.0.6"
   },
   "dependencies": {
-    "fast.js": "^0.1.1"
+    "fast.js": "^0.1.1",
+    "matcha": "^0.6.0"
   }
 }
