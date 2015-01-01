@@ -91,7 +91,7 @@ standard library features required:
 
 #### How to get ES6 Features
 
-Install [es6-shim](https://github.com/paulmillr/es6-shim) or [6to5](https://6to5.org/). [traceur](https://github.com/google/traceur-compiler) also works well.
+Install [6to5](https://6to5.org/) or use [core-js](https://github.com/zloirock/core-js) directly. [traceur](https://github.com/google/traceur-compiler) also works well.
 Unfortunately, did not have luck using the more lightweight & modular [es6-set](https://github.com/medikoo/es6-set) & [es6-symbol](https://github.com/medikoo/es6-symbol).
 
 You'll need to install an ES6 polyfill yourself, such as those listed
