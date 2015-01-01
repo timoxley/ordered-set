@@ -1,7 +1,7 @@
 {
   "name": "ordered-set",
   "version": "1.0.0",
-  "description": "",
+  "description": "`ordered-set` is a performant ES6 Set subclass that allows control over iteration order.",
   "main": "index.js",
   "scripts": {
     "test": "6to5-node test/index.js | tap-spec",
@@ -21,13 +21,23 @@
     "6to5": "^2.0.4",
     "6to5-browserify": "^1.4.0",
     "benchmark": "^1.0.0",
+    "matcha": "^0.6.0",
     "seedrandom": "^2.3.11",
     "tap-spec": "^2.1.2",
     "tape": "^3.0.3",
     "writ": "0.0.6"
   },
-  "dependencies": {
-    "fast.js": "^0.1.1",
-    "matcha": "^0.6.0"
-  }
+  "dependencies": {},
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timoxley/ordered-set.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timoxley/ordered-set/issues"
+  },
+  "homepage": "https://github.com/timoxley/ordered-set"
 }
