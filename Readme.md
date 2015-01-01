@@ -99,8 +99,9 @@ above. There is not one included with the package on purpose – this may
 seem like malpractice and I normally would advise against any kind of
 implicit dependencies but after battling with these issues across
 multiple projects I've concluded *npm currently has no suitable workflow
-for anything that mutates the global environment i.e. must be a
-singleton*.
+for anything that must be a singleton/mutates the global environment*.
+You're better off just adding the dependency manually to your parent
+package.
 
 I feel this should be best-practice for language polyfills – by omitting
 a transpiler you're free to use this with whatever transpiler you're
